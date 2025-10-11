@@ -7,6 +7,19 @@ document.addEventListener('copy', e => e.preventDefault());
 document.addEventListener('cut', e => e.preventDefault());
 document.addEventListener('paste', e => e.preventDefault());
 
+// Проверка экрана: только ПК (ширина > 768px)
+const isPC = window.innerWidth > 768;
+const mobileBlock = document.getElementById('mobile-block');
+const mainContent = document.getElementById('main-content');
+
+if (!isPC) {
+    mobileBlock.style.display = 'block';
+    mainContent.style.display = 'none';
+} else {
+    mobileBlock.style.display = 'none';
+    mainContent.style.display = 'flex';
+}
+
 // Элементы
 const telegramInput = document.getElementById('telegram-input');
 const keyboard = document.getElementById('keyboard');
@@ -26,7 +39,7 @@ keys.forEach(key => {
     keyElement.textContent = key.toUpperCase();
     keyElement.addEventListener('click', () => {
         telegramInput.value += key;
-        createParticles(keyElement); // Частицы при клике
+        createParticles(keyElement, 30);
     });
     keyboard.appendChild(keyElement);
 });
@@ -34,17 +47,17 @@ keys.forEach(key => {
 // Backspace и Enter
 backspace.addEventListener('click', () => {
     telegramInput.value = telegramInput.value.slice(0, -1);
-    createParticles(backspace);
+    createParticles(backspace, 20);
 });
 
 enter.addEventListener('click', () => {
     if (telegramInput.value.length >= 3) {
         platformWindow.style.display = 'block';
-        createParticles(enter);
+        createParticles(enter, 50);
     }
 });
 
-// Выбор платформы
+// Выбор платформы и скачивание по прямой ссылке
 document.querySelectorAll('.platform-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const platform = btn.dataset.platform;
@@ -54,20 +67,20 @@ document.querySelectorAll('.platform-btn').forEach(btn => {
             setTimeout(() => {
                 progressBar.style.display = 'none';
                 downloadStatus.style.display = 'block';
-                // Имитация скачивания (замени на real)
-                const filePath = platform === 'pc' ? 'Files/downloads/app.exe' : 'Files/downloads/app.apk';
+                // Прямые ссылки на файлы (ЗАМЕНИ НА СВОИ URL)
+                const fileUrl = platform === 'pc' ? 'https://yourserver.com/downloads/app.exe' : 'https://yourserver.com/downloads/app.apk';
                 const a = document.createElement('a');
-                a.href = filePath;
+                a.href = fileUrl;
                 a.download = platform === 'pc' ? 'app.exe' : 'app.apk';
-                a.click(); // Реальное скачивание, если файлы есть
-                createParticles(downloadBtn);
-            }, 3000);
+                a.click(); // Запускает скачивание, пользователь остаётся на сайте
+                createParticles(downloadBtn, 100);
+            }, 3000); // Задержка для анимации прогресс-бара
         };
-        createParticles(btn);
+        createParticles(btn, 30);
     });
 });
 
-// Ripple и частицы при клике по всему документу
+// Ripple и частицы при клике
 document.addEventListener('click', e => {
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
@@ -75,27 +88,27 @@ document.addEventListener('click', e => {
     ripple.style.top = `${e.clientY}px`;
     document.body.appendChild(ripple);
     setTimeout(() => ripple.remove(), 1000);
-    createParticles(e.target);
+    createParticles(e.target, 40);
 });
 
-// Функция для частиц (простой canvas эффект)
+// Частицы
 const canvas = document.getElementById('particles-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-function createParticles(element) {
+function createParticles(element, count = 20) {
     const rect = element.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < count; i++) {
         const particle = {
             x: x,
             y: y,
-            vx: (Math.random() - 0.5) * 10,
-            vy: (Math.random() - 0.5) * 10,
-            size: Math.random() * 5 + 2,
-            color: '#00ff88',
+            vx: (Math.random() - 0.5) * 15,
+            vy: (Math.random() - 0.5) * 15,
+            size: Math.random() * 8 + 3,
+            color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
             alpha: 1
         };
         particles.push(particle);
@@ -108,20 +121,22 @@ function animateParticles() {
     particles.forEach((p, index) => {
         p.x += p.vx;
         p.y += p.vy;
-        p.alpha -= 0.02;
+        p.alpha -= 0.015;
         if (p.alpha <= 0) particles.splice(index, 1);
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 255, 136, ${p.alpha})`;
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
         ctx.fill();
     });
+    ctx.globalAlpha = 1;
     requestAnimationFrame(animateParticles);
 }
 animateParticles();
 
 // Drag-and-drop для окон
 const windows = document.querySelectorAll('.window');
-windows.forEach(win => {
+windows.forEach((win, index) => {
     let isDragging = false;
     let offsetX, offsetY;
 
@@ -129,7 +144,8 @@ windows.forEach(win => {
         isDragging = true;
         offsetX = e.clientX - win.getBoundingClientRect().left;
         offsetY = e.clientY - win.getBoundingClientRect().top;
-        win.style.zIndex = 10; // На передний план
+        win.style.zIndex = 10 + index;
+        createParticles(win, 20);
     });
 
     document.addEventListener('mousemove', e => {
@@ -144,43 +160,72 @@ windows.forEach(win => {
     });
 });
 
-// Ресайз canvas на изменение окна
+// Позиции окон
+if (isPC) {
+    document.getElementById('title-window').style.left = '10%';
+    document.getElementById('title-window').style.top = '5%';
+    document.getElementById('input-window').style.left = '40%';
+    document.getElementById('input-window').style.top = '5%';
+    document.getElementById('platform-window').style.left = '70%';
+    document.getElementById('platform-window').style.top = '5%';
+    document.getElementById('download-window').style.left = '10%';
+    document.getElementById('download-window').style.top = '50%';
+    document.getElementById('telegram-window').style.left = '40%';
+    document.getElementById('telegram-window').style.top = '50%';
+    document.getElementById('cards-window').style.left = '10%';
+    document.getElementById('cards-window').style.top = '70%';
+    document.getElementById('cards-window').style.width = '80%';
+    document.getElementById('extra-window-1').style.left = '70%';
+    document.getElementById('extra-window-1').style.top = '30%';
+    document.getElementById('extra-window-2').style.left = '70%';
+    document.getElementById('extra-window-2').style.top = '60%';
+}
+
+// Ресайз canvas
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    if (window.innerWidth <= 768) {
+        mobileBlock.style.display = 'block';
+        mainContent.style.display = 'none';
+    } else {
+        mobileBlock.style.display = 'none';
+        mainContent.style.display = 'flex';
+    }
 });
 
-// Инициализация позиций окон для ПК (расставить по экрану)
-if (window.innerWidth > 768) {
-    document.getElementById('title-window').style.left = '10%';
-    document.getElementById('title-window').style.top = '10%';
-    document.getElementById('input-window').style.left = '40%';
-    document.getElementById('input-window').style.top = '10%';
-    document.getElementById('telegram-window').style.left = '70%';
-    document.getElementById('telegram-window').style.top = '10%';
-    document.getElementById('cards-window').style.left = '10%';
-    document.getElementById('cards-window').style.top = '40%';
-    document.getElementById('cards-window').style.width = '80%'; // Шире для карточек
-}
-
-// Добавить ripple стиль в CSS динамически (для полноты)
+// Ripple стиль
 const style = document.createElement('style');
 style.innerHTML = `
 .ripple {
     position: absolute;
-    background: rgba(0, 255, 136, 0.5);
+    background: rgba(0, 255, 136, 0.7);
     border-radius: 50%;
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
     animation: ripple-effect 0.7s linear;
     pointer-events: none;
 }
 @keyframes ripple-effect {
     to {
-        transform: scale(15);
+        transform: scale(20);
         opacity: 0;
     }
+}
+.mobile-block {
+    display: none;
+    text-align: center;
+    padding: 50px;
+    height: 100vh;
+    background: #0a0a0a;
+}
+.mobile-block h1 {
+    font-size: 48px;
+    color: #00ff88;
+    text-shadow: 0 0 15px #00ff88;
+}
+.mobile-block p {
+    font-size: 24px;
+    color: #ddd;
 }`;
 document.head.appendChild(style);
-
-// Конец скрипта, сука, наслаждайся!
