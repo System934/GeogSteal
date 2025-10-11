@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    user-select: none; /* Отключение копирования текста */
+    position: relative;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    overflow-y: auto; /* Скролл на мобилах */
+}
+
+.window {
+    background: rgba(34, 34, 34, 0.9);
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    position: absolute; /* Для drag-and-drop */
+    cursor: move;
+    animation: fadeIn 1s ease-in-out;
+    z-index: 1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+    font-size: 36px;
+    text-align: center;
+    color: #00ff88;
+    text-shadow: 0 0 15px #00ff88;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.description {
+    text-align: center;
+    font-size: 18px;
+    margin: 15px 0;
+    color: #ddd;
+}
+
+.input-section {
+    text-align: center;
+    margin: 15px 0;
+}
+
+#telegram-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background: #333;
+    border: 2px solid #00ff88;
+    color: #fff;
+    outline: none;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    max-width: 100%;
+    margin: 15px 0;
+}
+
+.key {
+    background: #444;
+    border: 2px solid #00ff88;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.key:hover, .key:active {
+    background: #00ff88;
+    color: #000;
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 0 15px #00ff88;
+}
+
+.special {
+    grid-column: span 5;
+    background: #ff0077;
+    border-color: #ff0077;
+}
+
+.special:hover {
+    background: #fff;
+    color: #ff0077;
+}
+
+.platform-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.platform-btn, .download-btn, .telegram-btn {
+    padding: 15px 30px;
+    background: #00ff88;
+    border: none;
+    color: #000;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.platform-btn:hover, .download-btn:hover, .telegram-btn:hover {
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 0 20px #00ff88;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #333;
+    border: 2px solid #00ff88;
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(to right, #00ff88, #ff0077);
+    animation: progress 3s ease forwards;
+}
+
+@keyframes progress {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+.download-status {
+    text-align: center;
+    font-size: 22px;
+    color: #ff0077;
+    text-shadow: 0 0 15px #ff0077;
+    animation: explode 0.5s ease;
+}
+
+@keyframes explode {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    background: #333;
+    border: 2px solid #ff0077;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 0 20px #ff0077;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+::selection {
+    background: linear-gradient(to right, #00ff88, #ff0077);
+    color: #fff;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+/* Адаптивность для мобил */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .window {
+        position: relative;
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .keyboard {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .platform-buttons {
+        flex-direction: column;
+    }
+}
+
+/* Для ПК - больше пространства */
+@media (min-width: 769px) {
+    .window {
+        width: 350px;
+    }
+}
