@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скачать файл - Пиздец Крутой Сайт</title>
+    <link rel="stylesheet" href="Files/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Окно с заголовком -->
+        <div class="window" id="title-window">
+            <h1 class="title">Скачать файл</h1>
+            <p class="description">Скачай наш охуенный софт для ПК или Android — быстро, мощно, стильно, без вирусов и прочей хуйни!</p>
+        </div>
+
+        <!-- Окно ввода Telegram-юзернейма -->
+        <div class="window" id="input-window">
+            <label for="telegram-input">Введите Telegram-юзернейм (через нашу клаву, сука):</label>
+            <input type="text" id="telegram-input" readonly placeholder="@username_123">
+            <div class="keyboard" id="keyboard"></div>
+            <button class="key special" id="backspace">←</button>
+            <button class="key special" id="enter">Enter</button>
+        </div>
+
+        <!-- Окно выбора платформы -->
+        <div class="window" id="platform-window" style="display: none;">
+            <h2>Выберите платформу, блядь:</h2>
+            <div class="platform-buttons">
+                <button class="platform-btn" data-platform="pc">PC (.exe)</button>
+                <button class="platform-btn" data-platform="android">Android (.apk)</button>
+            </div>
+        </div>
+
+        <!-- Окно скачивания -->
+        <div class="window" id="download-window" style="display: none;">
+            <button class="download-btn">Скачать, нахуй!</button>
+            <div class="progress-bar" style="display: none;">
+                <div class="progress"></div>
+            </div>
+            <p class="download-status" style="display: none;">Скачано, сука! Теперь наслаждайся.</p>
+        </div>
+
+        <!-- Окно Telegram-канала -->
+        <div class="window" id="telegram-window">
+            <a href="https://t.me/xael5" class="telegram-btn" target="_blank">Присоединяйся к @xael5, пиздуй туда!</a>
+        </div>
+
+        <!-- Окно с 10 карточками -->
+        <div class="window" id="cards-window">
+            <h2>Куча крутых фич, блядь:</h2>
+            <div class="cards">
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
+                    <h3>Фича 1</h3>
+                    <p>Пиздец быстрый запуск, без лагов.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#ff0077"/></svg>
+                    <h3>Фича 2</h3>
+                    <p>Анимации, от которых хуй встанет.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#0088cc"/></svg>
+                    <h3>Фича 3</h3>
+                    <p>Адаптивность для всех устройств.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
+                    <h3>Фича 4</h3>
+                    <p>Неон и градиенты везде.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#ff0077"/></svg>
+                    <h3>Фича 5</h3>
+                    <p>Drag-and-drop окон, как в 90-х.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#0088cc"/></svg>
+                    <h3>Фича 6</h3>
+                    <p>Частицы при клике, ебать круто.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
+                    <h3>Фича 7</h3>
+                    <p>Виртуальная клава без лагов.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#ff0077"/></svg>
+                    <h3>Фича 8</h3>
+                    <p>Защита от копипасты.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#0088cc"/></svg>
+                    <h3>Фича 9</h3>
+                    <p>Прогресс-бар с анимацией.</p>
+                </div>
+                <div class="card">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z" fill="#00ff88"/></svg>
+                    <h3>Фича 10</h3>
+                    <p>Всё пиздец как стильно.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="particles-canvas" style="position: absolute; top: 0; left: 0; pointer-events: none;"></canvas>
+
+    <script src="Files/script.js"></script>
+</body>
+</html>
